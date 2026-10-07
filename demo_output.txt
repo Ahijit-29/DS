@@ -1,0 +1,68 @@
+--- TEST 1: high-priority camps, limited vehicle capacity, insufficient supplies ---Camps by priority:
+ [1] Belagavi    families=450  urgency=5 score=5450 need(Med/Water/Food)=20/50/40
+ [4] Madikeri    families=350  urgency=5 score=5350 need(Med/Water/Food)=25/30/35
+ [2] Bagalkot    families=300  urgency=4 score=4300 need(Med/Water/Food)=10/40/30
+ [5] Karwar      families=150  urgency=3 score=3150 need(Med/Water/Food)=8/20/15
+ [3] Raichur     families=200  urgency=2 score=2200 need(Med/Water/Food)=5/25/20
+ [6] Shivamogga  families=250  urgency=1 score=1250 need(Med/Water/Food)=5/15/15
+
+=== Dispatch round (0 queued request(s) applied) ===
+1. Belagavi - SERVED
+   route: Hubballi Depot -> Belagavi (100 km)
+   delivered Med/Water/Food: 20/50/40  vehicles: V1(20) V1(50) V2(40) 
+2. Madikeri - PARTIAL
+   route: Hubballi Depot -> Shivamogga -> Madikeri (310 km)
+   delivered Med/Water/Food: 25/30/15  vehicles: V3(25) V2(20) V3(10) V1(10) V3(5) 
+3. Bagalkot - NOT SERVED (no capacity/stock)
+   route: Hubballi Depot -> Bagalkot (110 km)
+   delivered Med/Water/Food: 0/0/0  vehicles: -
+4. Karwar - NOT SERVED (no capacity/stock)
+   route: Hubballi Depot -> Karwar (150 km)
+   delivered Med/Water/Food: 0/0/0  vehicles: -
+5. Raichur - NOT SERVED (no capacity/stock)
+   route: Hubballi Depot -> Raichur (190 km)
+   delivered Med/Water/Food: 0/0/0  vehicles: -
+6. Shivamogga - NOT SERVED (no capacity/stock)
+   route: Hubballi Depot -> Shivamogga (140 km)
+   delivered Med/Water/Food: 0/0/0  vehicles: -
+Remaining stock -> Medicine:5 Water:40 Food:45
+
+--- TEST 2: Hubballi-Belagavi bridge and Shivamogga-Madikeri road blocked; new emergency at Raichur ---
+Hubballi Depot <-> Belagavi marked BLOCKED.
+Shivamogga <-> Madikeri marked BLOCKED.
+Emergency request queued for Raichur.
+Emergency request queued for Belagavi.
+
+=== Dispatch round (2 queued request(s) applied) ===
+1. Belagavi - SERVED
+   route: Hubballi Depot -> Bagalkot -> Belagavi (230 km)
+   delivered Med/Water/Food: 5/5/5  vehicles: V1(5) V1(5) V1(5) 
+2. Madikeri - UNREACHABLE - deferred
+3. Raichur - SERVED
+   route: Hubballi Depot -> Raichur (190 km)
+   delivered Med/Water/Food: 15/35/30  vehicles: V1(15) V2(35) V1(30) 
+4. Bagalkot - SERVED
+   route: Hubballi Depot -> Bagalkot (110 km)
+   delivered Med/Water/Food: 10/40/30  vehicles: V3(10) V3(30) V2(10) V1(20) V2(10) 
+5. Karwar - PARTIAL
+   route: Hubballi Depot -> Karwar (150 km)
+   delivered Med/Water/Food: 5/0/0  vehicles: V2(5) 
+6. Shivamogga - NOT SERVED (no capacity/stock)
+   route: Hubballi Depot -> Shivamogga (140 km)
+   delivered Med/Water/Food: 0/0/0  vehicles: -
+Remaining stock -> Medicine:10 Water:20 Food:40
+
+--- TEST 3: Madikeri road reopened ---
+Shivamogga <-> Madikeri reopened.
+
+=== Dispatch round (0 queued request(s) applied) ===
+1. Madikeri - SERVED
+   route: Hubballi Depot -> Shivamogga -> Madikeri (310 km)
+   delivered Med/Water/Food: 0/0/20  vehicles: V1(20) 
+2. Karwar - SERVED
+   route: Hubballi Depot -> Karwar (150 km)
+   delivered Med/Water/Food: 3/20/15  vehicles: V1(3) V2(20) V1(15) 
+3. Shivamogga - PARTIAL
+   route: Hubballi Depot -> Shivamogga (140 km)
+   delivered Med/Water/Food: 5/0/5  vehicles: V1(5) V2(5) 
+Remaining stock -> Medicine:2 Water:0 Food:0

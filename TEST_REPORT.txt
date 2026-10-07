@@ -1,0 +1,45 @@
+SMART FLOOD RELIEF DISTRIBUTION SYSTEM
+Verification Report
+
+Source basis: Micro-Project Proposal, Data Structures Based Smart Flood Relief Distribution and Resource Allocation System.
+
+1. C++ BUILD TEST
+- Command: g++ -std=c++17 -Wall -Wextra -pedantic -o flood main.cpp
+- Result: PASS (no compiler warnings/errors reported)
+
+2. SEARCH TEST
+- Search by name: Belagavi -> PASS
+- Search by numeric ID: 4 -> Madikeri -> PASS
+- Search unknown camp: Unknown -> Camp not found -> PASS
+- Empty input is rejected by the updated search handler.
+
+3. INTEGRATED TEST SCENARIOS
+Test 1: High-priority camps, limited vehicle capacity, insufficient supplies
+- Belagavi: SERVED
+- Madikeri: PARTIAL
+- Remaining lower-priority camps: NOT SERVED because stock/vehicle capacity was exhausted.
+- PASS
+
+Test 2: Blocked Hubballi-Belagavi and Shivamogga-Madikeri roads + new emergency requests
+- Belagavi was rerouted through Bagalkot (230 km).
+- Madikeri became UNREACHABLE and was deferred.
+- New Raichur and Belagavi requests were applied FIFO before dispatch.
+- PASS
+
+Test 3: Reopen Shivamogga-Madikeri road
+- Madikeri became reachable again through Hubballi Depot -> Shivamogga -> Madikeri (310 km).
+- Remaining reachable camps were processed according to priority.
+- PASS
+
+4. DATA STRUCTURES / ALGORITHMS VERIFIED
+- Linked-list queue: pending emergency requests.
+- Max-heap: camp priority scheduling.
+- Binary search: camp lookup by ID.
+- Linear search: camp lookup by name.
+- Sorting: priority display.
+- Graph + Dijkstra: shortest route over currently open roads.
+- Vehicle/resource allocation: capacity and stock limits enforced.
+
+5. WEB DEMO
+- flood_relief_demo.html JavaScript syntax check: PASS.
+- Demo supports road blocking/reopening, emergency requests, restocking, dispatch, priority ordering, shortest-route display, and reset.
