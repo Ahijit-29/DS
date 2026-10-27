@@ -7,3 +7,10 @@ flood
 # Temporary files & logs
 *.log
 .system_generated/
+.cache/
+
+# IDE & Language Server
+.vscode/
+.clangd
+compile_commands.json
+compile_flags.txt
